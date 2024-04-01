@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, inital-scale=1.0">
+    <title>AI Calculator</title>
+
+</head>
+<style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    :root{
+      --body--bg: #a0d7ff;
+      --cercle-bg: #109dff; 
+    }
+    body{
+      min-height: 100vh;
+      background: radial-gradient(at 10% 10%, var(--body--bg) 50%, lightskyblue);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .cercle{
+      position: absolute;
+      width: 500px;
+      aspect-ratio: 1;
+      background: var(--cercle-bg);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-30%, -50%);
+    }
+    .calculator{
+        position: absolute;
+        left: 600px;
+        width: 250px;
+        height: 500px;
+        border-radius: 30px;
+        background: linear-gradient(130deg, #fff, #fff3);
+        z-index: 2;
+        backdrop-filter: blur(15px);
+        box-shadow: 50px 50px 200px #0963a1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        gap: 10px;
+    }
+    .calculatorS{
+        position: relative;
+        top: 80px;
+        left: 200px;
+        width: 250px;
+        height: 500px;
+        border-radius: 30px;
+        background: linear-gradient(130deg, #020202, rgba(8, 8, 8, 0.781));
+        z-index: 2;
+        backdrop-filter: blur(15px);
+        box-shadow: 50px 50px 200px #0963a1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        gap: 10px
+
+    }
+    .display{
+        color: black;
+        width: 200px;
+        height: 70px;
+        border: 0;
+        outline: none;
+        background: transparent;
+        padding: 5px;
+        text-align: left;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    .displayS{
+        color: white;
+        width: 200px;
+        height: 70px;
+        border: 0;
+        outline: none;
+        background: transparent;
+        padding: 5px;
+        text-align: left;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    .btn-area{
+      display: flex;
+      gap: 10px;
+    }
+    .buttons{
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+    }
+    .buttons input{
+      width: 45px;
+      aspect-ratio: 1/1;
+      border-radius: 10px;
+      border: 0;
+      outline: none;
+      background: #fff5;
+      box-shadow: inset 0 0 7px #fff,
+      0 0 20px #0080bb2a;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.13s;
+    }
+    .buttons input:hover{
+      background: #ffffffb4;
+      color: #109dff;
+    }
+    .buttons input:active{
+      background: #0000;
+    }
+    .buttons .clear, 
+    .buttons .delete{
+      color: #7ec9ff;
+    }
+    .buttons .equal{
+      background: #54b8ff;
+      height: 100px;
+    }
+    .buttons .equalS{
+      background: #54b8ff;
+      height: 100px;
+    }
+    .buttonsS{
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+    }
+    .buttonsS input{
+      width: 45px;
+      aspect-ratio: 1/1;
+      border-radius: 10px;
+      border: 0;
+      outline: none;
+      background: #fff5;
+      box-shadow: inset 0 0 7px #fff,
+      0 0 20px #0080bb2a;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.13s;
+    }
+    .buttonsS input:hover{
+      background: #ffffffb4;
+      color: #109dff;
+    }
+    .buttonsS input:active{
+      background: #0000;
+    }
+    .buttonsS .clear, 
+    .buttonsS .delete{
+      color: #7ec9ff;
+    }
+    .buttonsS .equal{
+      background: #54b8ff;
+      height: 100px;
+    }
+    .buttonsS .equalS{
+      background: #54b8ff;
+      height: 100px;
+    }
+</style>
+<body>
+    <div class="calculatorS">
+        <div class="display-area">
+            <input type="text" name="displayS" class="displayS" readonly value="">
+        </div>
+        <div class="btn-area">
+            <div class="buttonsS">
+                <input type="button" value="Ac" class="clearS">
+                <input type="button" value="7" class="input">
+                <input type="button" value="4" class="input">
+                <input type="button" value="1" class="input">
+                <input type="button" value="0" class="input">
+            </div>
+            <div class="buttonsS">
+                <input type="button" value="DE" class="deleteS">
+                <input type="button" value="8" class="input">
+                <input type="button" value="5" class="input">
+                <input type="button" value="2" class="input">
+                <input type="button" value="00" class="input">
+              </div>
+              <div class="buttonsS">
+                <input type="button" value="/" class="input operator">
+                <input type="button" value="9" class="input">
+                <input type="button" value="6" class="input">
+                <input type="button" value="3" class="input">
+                <input type="button" value="." class="input">
+              </div>
+              <div class="buttonsS">
+                <input type="button" value="*" class="input operator">
+                <input type="button" value="-" class="input operator">
+                <input type="button" value="+" class="input operator">
+                <input type="button" value="=" class="equalS">
+              </div>
+           </div>
+    </div>
+    <div class="cercle"></div>
+    <div class="calculator">
+        <div class="display-area">
+        <input type="text" name="display" class="display" readonly value="">
+    </div>
+    <div class="btn-area">
+        <div class="buttons">
+            <input type="button" value="Ac" class="clear">
+            <input type="button" value="7" class="input">
+            <input type="button" value="4" class="input">
+            <input type="button" value="1" class="input">
+            <input type="button" value="0" class="input">
+        </div>
+        <div class="buttons">
+            <input type="button" value="DE" class="delete">
+            <input type="button" value="8" class="input">
+            <input type="button" value="5" class="input">
+            <input type="button" value="2" class="input">
+            <input type="button" value="00" class="input">
+          </div>
+          <div class="buttons">
+            <input type="button" value="/" class="input operator">
+            <input type="button" value="9" class="input">
+            <input type="button" value="6" class="input">
+            <input type="button" value="3" class="input">
+            <input type="button" value="." class="input">
+          </div>
+          <div class="buttons">
+            <input type="button" value="*" class="input operator">
+            <input type="button" value="-" class="input operator">
+            <input type="button" value="+" class="input operator">
+            <input type="button" value="=" class="equal">
+          </div>
+       </div>
+    </div>
+   <script>
+    let display = document.querySelector(".display"); 
+    let input = document.querySelectorAll(".buttons .input");
+      input.forEach((inputs) =>{
+        inputs.addEventListener("click", () =>{
+            display.value += inputs.value;
+        });
+      });
+      let clear = document.querySelector(".clear");
+      clear.addEventListener("click", ()=> {
+        display.value = "";
+      });
+      let deletes = document.querySelector(".delete");
+      deletes.addEventListener("click", ()=>{
+        display.value = display.value.toString().slice(0, -1);
+      });
+      let equal = document.querySelector(".equal");
+      equal.addEventListener("click", ()=>{
+        display.value = eval(display.value);
+      });
+      //Code for second calculator:
+    let displayS = document.querySelector(".displayS"); 
+    let inputS = document.querySelectorAll(" .buttonsS .input");
+      inputS.forEach((inputs) =>{
+        inputs.addEventListener("click", () =>{
+            displayS.value += inputs.value;
+        });
+      });
+    let clearS = document.querySelector(".clearS");
+      clearS.addEventListener("click", ()=> {
+        displayS.value = "";
+      });
+    let deletesS = document.querySelector(".deleteS");
+      deletesS.addEventListener("click", ()=>{
+        displayS.value = displayS.value.toString().slice(0, -1);
+      });
+    let equalS = document.querySelector(".equalS");
+      equalS.addEventListener("click", ()=>{
+        displayS.value = eval(displayS.value);
+      });
+   </script>
+</body>
+</html>
